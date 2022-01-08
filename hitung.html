@@ -270,7 +270,21 @@ Jadi, faktor persekutuan dari 10 dan 15 adalah 1 dan 5.
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
   <script>
-
+    const fpb = (m, n) => { 
+    m = Math.abs(m) 
+    n = Math.abs(n) 
+ 
+    if(!n) return n === 0 ? m : NaN; 
+	 
+    let r = m%n 
+    return fpb(n, r) 
+} 
+    
+    const kpk = (m, n) => { 
+    let hasilFPB = fpb(m, n) 
+ 
+    return Math.abs(m*n) / hasilFPB 
+} 
     </script>
 
 </body>
