@@ -66,7 +66,7 @@
           <h1>Rumus Perhitungan FPB & KPK</h1>
           <h2>Input kan 2 angka untuk menentukan KPK & FPB secara Otomatis </h2>
         </div>
-      <form class="form-control" action="hasil.php" method="post">
+    
         <div class="mb-3">
       <label for="formGroupExampleInput" class="form-label">Angka Pertama</label>
             <input type="text" name="angka_pertama" class="form-control" id="formGroupExampleInput" placeholder="Input kan angka pertama">
@@ -81,13 +81,9 @@
 
         <button type="submit" class="btn-get-started scrollto">Hitung</button>
       </div>
-</form>
+
 <hr/>
-   <!-- bisa juga ditampilkan di tag html -->
-   Hasil KPK = <?php echo isset($hasil_kpk) ? $hasil_kpk : 'Silakan lakukan penghitungan terlebih dahulu...'; ?>
-   <br/>
-   Hasil FPB = <?php echo isset($hasil_fpb) ? $hasil_fpb : 'Silakan lakukan penghitungan terlebih dahulu...'; ?>
- 
+  
 
       </div>
     </div>
