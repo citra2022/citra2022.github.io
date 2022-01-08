@@ -1,0 +1,339 @@
+<?php
+//untuk menentukan FPB 2 bilangan maka panggil fungsi gcf(angka1, angka2);
+function fpb($a, $b) { 
+  return ( $b == 0 ) ? ($a):( fpb($b, $a % $b) ); 
+}
+//untuk menentukan KPK 2 bilangan maka panggil fungsi lcm(angka1, angka2);
+function kpk($a, $b) { 
+  return ( $a / fpb($a,$b) ) * $b; 
+}
+
+if (isset($_GET['aksi'])) {
+  // kemudian masukkan ke variabel, alasannya? jane sih ben luwih gampang, males ngetik dowo
+  $aksi = $_GET['aksi'] ;
+
+  // disini bisa pakai switch bisa juga pakai if, aku lebih suka kamu, eh switch
+  switch ($aksi) {
+    case 'hitung':
+      // disini kan belum dapat data dari form nya nih, ambil dulu dengan sintaks $_POST['index']
+      // index itu didapat dari atribut name tiap input, ini alasannya kenapa name harus berbeda
+      // jangan lupa masukkin ke variabel juga
+      $pertama = $_POST['angka_pertama'];
+      $kedua   = $_POST['angka_kedua'];
+
+      // nah disini baru panggil fungsi kpk sama fpb diatas, trus masukkin ke variabel
+      // untuk kpk
+      $hasil_kpk = kpk($pertama, $kedua);
+      $hasil_fpb = fpb($pertama, $kedua);
+
+      $_GET['aksi'] = '';
+      // sebenarnya bisa langsung ditampilin disini, atau dimana aja.
+      // kan udah dimasukkin ke variabel
+      // misal kalo disini
+      
+    
+    // default itu digunakan kalo aksi yang dimasukkan ngaco
+    default:
+      echo 'Masih dalam tahap pengembangan...';
+      break;
+  }
+}
+?>
+ 
+<!-- 
+  samain persepsi dulu.
+    - php itu gak bisa nampilin UI
+    - sekalipun bisa dia butuh markup language, biasanya HTML
+ -->
+ <!-- 
+  misalkan hasil perhitungan akan ditampilkan dibawah ini, maka berikut ini sintaksnya
+  perhatikan ada tag php didalamnya
+  -->
+ 
+<!-- mulai tag php -->
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Hitung FPB & KPK</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: OnePage - v4.7.0
+  * Template URL: https://bootstrapmade.com/onepage-multipurpose-bootstrap-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <!-- <img class="logo" src="./assetsimg/citra.jpg" /><a href="index.html">Citra</a> -->
+      <!-- Uncomment below if you prefer to use an image logo -->
+       <a href="index.html" class="logo"><img src="assets/img/logo-umm.png" width="190px" height="150px" alt="" class="img-fluid"></a>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link btn btn-outline-info text-dark text-center" href="./index.html"> Home </a></li>
+            
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
+    <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+      <div class="row justify-content-center">
+        <div class="col-xl-7 col-lg-9 text-center">
+          <h1>Rumus Perhitungan FPB & KPK</h1>
+          <h2>Input kan 2 angka untuk menentukan KPK & FPB secara Otomatis </h2>
+        </div>
+      <form class="form-control" action="hasil.php" method="post">
+        <div class="mb-3">
+      <label for="formGroupExampleInput" class="form-label">Angka Pertama</label>
+            <input type="text" name="angka_pertama" class="form-control" id="formGroupExampleInput" placeholder="Input kan angka pertama">
+      </div>
+      <div class="mb-3">
+        <label for="formGroupExampleInput2" class="form-label">Angka Kedua</label>
+          <input type="text" name="angka_kedua" class="form-control" id="formGroupExampleInput2" placeholder="Input kan angka kedua">
+      </div>
+      </div>
+      <div class="text-center">
+
+
+        <button type="submit" class="btn-get-started scrollto">Hitung</button>
+      </div>
+</form>
+<hr/>
+   <!-- bisa juga ditampilkan di tag html -->
+   Hasil KPK = <?php echo isset($hasil_kpk) ? $hasil_kpk : 'Silakan lakukan penghitungan terlebih dahulu...'; ?>
+   <br/>
+   Hasil FPB = <?php echo isset($hasil_fpb) ? $hasil_fpb : 'Silakan lakukan penghitungan terlebih dahulu...'; ?>
+ 
+
+      </div>
+    </div>
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+
+     <!-- ======= About Video Section ======= -->
+    
+
+ 
+
+
+    
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+
+    <div class="footer-top">
+      <div class="container">
+        
+      
+      </div>
+    </div>
+
+    <div class="container d-md-flex py-4">
+
+      <div class="me-md-auto text-center text-md-start">
+        <div class="copyright">
+          &copy; Copyright <strong><span>2022</span></strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+          <!-- All the links in the footer should remain intact. -->
+          <!-- You can delete the links only if you purchased the pro version. -->
+          <!-- Licensing information: https://bootstrapmade.com/license/ -->
+          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/onepage-multipurpose-bootstrap-template/ -->
+          Designed by <a href="#">Citra Firdani</a>
+        </div>
+      </div>
+      <div class="social-links text-center text-md-right pt-3 pt-md-0">
+        <a href="#" class="twitter"><i class="bx bxl-whatsapp"></i></a>
+        <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+        <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <!-- Modal -->
+
+  <div class="modal fade" id="kelipatan_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Contoh Kelipatan</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+         <p>
+          2 × 1 = 2<br>
+          2 × 2 = 4<br>
+          2 × 3 = 6<br>
+          2 × 4 = 8<br>
+          2 × 5 =10… dst.<br>
+          Jadi, angka 2, 4, 6, 8, 10, dan seterusnya merupakan kelipatan dari 2.
+          
+         </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-primary">Back </button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="faktor_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Contoh Faktor</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+         <p>
+          Misalnya <b>10</b>, <br>
+          angka <b>10</b> ini kira-kira bisa habis dibagi oleh angka apa saja? Angka <b>10</b> bisa dibagi oleh 1, 2, 5, dan 10.<br> Jadi,<b> 1, 2, 5, dan 10</b> ini merupakan faktor dari <b>10</b>.
+          
+         </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-primary">Back </button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="prima_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Contoh Bilangan Prima</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+         <p>
+          <b><i class="fa fa-arrow-right">-></i></b> Contoh 1 angka  <b>13</b>, <br>13 hanya mempunyai faktor 1 dan 13. <br> <u>Faktor yang merupakan bilangan prima disebut faktor prima</u>. <br> <u>Faktorisasi prima adalah perkalian dari semua faktor primanya</u>
+          <br><b><i>-></i></b> Contoh 2 angka  <b>30</b>, <br>faktor dari 30 adalah 1, 2, 3, 5, 6, 10, 15 dan 30.<br> Maka faktor primanya adalah 2, 3., dan 5. <br>Dan faktorisasi primanya adalah 2×3×5=30
+         </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-primary">Back </button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="modal fade" id="kpk_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Contoh KPK</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+         <p>
+          Kelipatan persekutuan dari 3 dan 7 adalah...<br>
+          Jawab:<br>
+          3=3,6,9,12,15,18,21,24,27,30,33,36,39,42,45,…<br>
+          7=7,14,21,28,35,42,49,56,63,70,...<br>
+          Jadi, kelipatan persekutuan dari 3 dan 7 adalah <b>21,42,…</b>
+         </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-primary">Back </button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="fpb_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Contoh FPB</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+         <p>
+          Tentukan faktor persekutuan dari 10 dan 15!<br>
+Jawab: <br>
+10 = 1,2,5,10<br>
+15 = 1,3,5,15<br>
+Jadi, faktor persekutuan dari 10 dan 15 adalah 1 dan 5.
+
+          
+         </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-primary">Back </button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/purecounter/purecounter.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+  <script>
+
+    </script>
+
+</body>
+
+</html>
