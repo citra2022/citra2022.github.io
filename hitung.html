@@ -287,12 +287,16 @@ Jadi, faktor persekutuan dari 10 dan 15 adalah 1 dan 5.
  
     return Math.abs(m*n) / hasilFPB 
 } 
-    $("#hitung_all").click(function({
-    	var angka1 = $("[name=angka_pertama"].val();
+
+    
+    $(document).ready(function(){
+  $("#hitung_all").click(function(){
+  	var angka1 = $("[name=angka_pertama"].val();
 			   var angka2 = $("[name=angka_kedua]").val();
 	  
 	  alert(fpb(angka1,angka2));
-    })
+  });
+});
     </script>
 
 </body>
